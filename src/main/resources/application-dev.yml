@@ -3,5 +3,5 @@ spring:
         name: Student
 
 server:
-    port: 8080
+    port: ${DEV_SERVER_PORT}
 
