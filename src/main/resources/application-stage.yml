@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Student
+
+server:
+  port: ${STAGE_SERVER_PORT}

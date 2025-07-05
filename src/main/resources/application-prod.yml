@@ -3,4 +3,4 @@ spring:
     name: Student
 
 server:
-  port: 8080
+  port: ${PROD_SERVER_PORT}
