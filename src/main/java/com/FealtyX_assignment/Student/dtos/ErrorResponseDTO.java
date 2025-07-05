@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import static com.FealtyX_assignment.Student.utils.Constants.DEFAULT_DATE_TIME;
+import static com.FealtyX_assignment.Student.utils.Constants.DEFAULT_DATE_TIME_FORMAT;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class ErrorResponseDTO {
     private String details;
     private String path;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DEFAULT_DATE_TIME_FORMAT)
     @Builder.Default
     private LocalDateTime timestamp = DEFAULT_DATE_TIME;
 
