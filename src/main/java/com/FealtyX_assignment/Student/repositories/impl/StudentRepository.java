@@ -145,9 +145,13 @@ public class StudentRepository implements IStudentRepository {
 
     /**
      * Deletes all student entities from the repository.
+     * @throws StudentNotFoundException if there are no students to delete
      */
     @Override
     public void deleteAll() {
+        if (studentStore.isEmpty()) {
+            throw new StudentNotFoundException("No student records found to delete");
+        }
         studentStore.clear();
     }
 }
