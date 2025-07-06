@@ -11,4 +11,6 @@ public interface IStudentRepository {
     List<Student> findAll();
     void deleteById(Integer id);
     boolean existsById(Integer id);
+    Optional<Student> findByEmail(String email);
+    void deleteAll();
 }
