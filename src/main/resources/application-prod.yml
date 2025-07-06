@@ -1,6 +1,63 @@
 spring:
-  application:
-    name: Student
+    application:
+        name: Student
 
 server:
-  port: ${PROD_SERVER_PORT}
+    port: ${PROD_SERVER_PORT}
+
+ollama:
+    api:
+        base-url: ${OLLAMA_API_URL}
+
+# Production specific actuator configuration
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,metrics,prometheus
+            base-path: /monitoring
+    endpoint:
+        health:
+            show-details: never
+            show-components: never
+            probes:
+                enabled: true
+            group:
+                readiness:
+                    include: db,diskSpace
+                liveness:
+                    include: ping
+        shutdown:
+            enabled: false
+    info:
+        enabled: false
+    metrics:
+        tags:
+            application: ${spring.application.name}
+            environment: prod
+        distribution:
+            percentiles-histogram:
+                http.server.requests: true
+            slo:
+                http.server.requests: 50ms,100ms,200ms
+        enable:
+            jvm: true
+            process: true
+            system: true
+    health:
+        diskspace:
+            enabled: true
+        db:
+            enabled: true
+        livenessstate:
+            enabled: true
+        readinessstate:
+            enabled: true
+
+# Production logging configuration
+logging:
+    level:
+        root: WARN
+        com.FealtyX_assignment.Student: INFO
+        org.springframework.web: WARN
+        org.springframework.actuator: WARN

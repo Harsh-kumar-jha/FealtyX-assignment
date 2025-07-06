@@ -1,6 +1,48 @@
 spring:
-  application:
-    name: Student
+    application:
+        name: Student
 
 server:
-  port: ${STAGE_SERVER_PORT}
+    port: ${STAGE_SERVER_PORT}
+
+ollama:
+    api:
+        base-url: ${OLLAMA_API_URL}
+
+# Staging specific actuator configuration
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics,prometheus,loggers
+            base-path: /actuator
+    endpoint:
+        health:
+            show-details: when_authorized
+            show-components: when_authorized
+            group:
+                readiness:
+                    include: db,diskSpace
+        shutdown:
+            enabled: false
+    info:
+        git:
+            mode: simple
+            enabled: true
+        build:
+            enabled: true
+    metrics:
+        tags:
+            application: ${spring.application.name}
+            environment: stage
+        distribution:
+            percentiles-histogram:
+                http.server.requests: true
+
+# Staging logging configuration
+logging:
+    level:
+        root: INFO
+        com.FealtyX_assignment.Student: INFO
+        org.springframework.web: INFO
+        org.springframework.actuator: INFO
