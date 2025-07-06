@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +24,13 @@ import static com.FealtyX_assignment.Student.utils.Constants.SEPARATOR;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handle custom base exception
+    /**
+     * Handles custom exceptions of type BaseException.
+     *
+     * @param ex the BaseException that was thrown
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the error
+     */
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ErrorResponseDTO> handleBaseException(
             BaseException ex,
@@ -43,7 +47,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, ex.getStatus());
     }
 
-    // Handle validation exceptions
+    /**
+     * Handles exceptions caused by validation errors in method arguments.
+     *
+     * @param ex the exception that was thrown when method argument validation failed
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the validation errors
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidationException(
             MethodArgumentNotValidException ex,
@@ -65,7 +75,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle constraint violations
+    /**
+     * Handles exceptions caused by constraint violations during validation.
+     *
+     * @param ex the exception that was thrown due to a constraint violation
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the validation errors
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleConstraintViolation(
             ConstraintViolationException ex,
@@ -86,7 +102,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle missing parameters
+    /**
+     * Handles exceptions caused by missing required HTTP request parameters.
+     *
+     * @param ex the exception that was thrown when a required parameter was missing
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the missing parameter error
+     */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ErrorResponseDTO> handleMissingParams(
             MissingServletRequestParameterException ex,
@@ -103,7 +125,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle type mismatch
+    /**
+     * Handles exceptions caused by method argument type mismatches.
+     *
+     * @param ex the exception that was thrown when a method argument type mismatch occurred
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the type mismatch error
+     */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponseDTO> handleTypeMismatch(
             MethodArgumentTypeMismatchException ex,
@@ -120,7 +148,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle malformed JSON
+    /**
+     * Handles exceptions caused by unreadable HTTP message bodies (e.g., malformed JSON).
+     *
+     * @param ex the exception that was thrown when the HTTP message was not readable
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details about the error
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponseDTO> handleMessageNotReadable(
             HttpMessageNotReadableException ex,
@@ -137,7 +171,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // Handle all other exceptions
+    /**
+     * Handles all uncaught exceptions and returns a generic error response.
+     *
+     * @param ex the exception that was thrown
+     * @param request the HTTP request during which the exception occurred
+     * @return a ResponseEntity containing an ErrorResponseDTO with details of the error
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleAllOtherExceptions(
             Exception ex,

@@ -30,8 +30,7 @@ public class Constants {
     public static final String STUDENT_EMAIL_NOT_NULL_OR_EMPTY = "Student email cannot be null or empty";
     public static final String EMAIL_INVALID = "Invalid email format";
     public static final String NAME_NOT_EMPTY = "Name cannot be empty";
-    public static final String INVALID_AGE = "Invalid age";
-    public static final String EMAIL_ALREADY_EXISTS = "Email already exists";
+    public static final String EMAIL_ALREADY_EXISTS = "Email already exists: ";
     public static final String SEPARATOR = ": ";
 
 }
