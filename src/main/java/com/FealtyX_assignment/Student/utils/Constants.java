@@ -1,13 +1,7 @@
 package com.FealtyX_assignment.Student.utils;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import com.FealtyX_assignment.Student.models.Student;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
@@ -24,5 +18,5 @@ public class Constants {
     public static final String STUDENT_ID_NOT_NULL = "Student ID cannot be null";
     public static final String EMAIL_ALREADY_EXISTS = "Email already exists: ";
     public static final String SEPARATOR = ": ";
-
+    public static final String MODEL_NAME = "llama3.2:1b";
 }

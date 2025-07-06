@@ -5,3 +5,39 @@ spring:
 server:
     port: ${DEV_SERVER_PORT}
 
+ollama:
+    api:
+        base-url: ${OLLAMA_API_URL}
+
+# Development specific actuator configuration
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"  # Expose all endpoints in dev for testing
+            base-path: /actuator
+    endpoint:
+        health:
+            show-details: always
+            show-components: always
+        env:
+            show-values: always
+    info:
+        env:
+            enabled: true
+        git:
+            mode: full
+            enabled: true
+        build:
+            enabled: true
+        java:
+            enabled: true
+
+# Development logging configuration
+logging:
+    level:
+        root: INFO
+        com.FealtyX_assignment.Student: DEBUG
+        org.springframework.web: DEBUG
+        org.springframework.actuator: DEBUG
+
