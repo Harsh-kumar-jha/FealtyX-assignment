@@ -22,4 +22,16 @@ public class OllamaRequestDTO {
 
     @Builder.Default
     private Boolean stream = FALSE;
+
+    private Options options;
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Options {
+        private Double temperature;
+        private Integer topK;
+        private Double topP;
+    }
 }
