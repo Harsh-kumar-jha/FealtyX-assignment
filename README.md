@@ -106,24 +106,7 @@ Detailed API documentation is available in [api-docs/studentCRUD.md](api-docs/st
 - Name: 2-100 characters, required
 - Age: Between 16 and 120, required
 - Email: Valid email format, unique, max 255 characters, required
-- Pagination: Page number ≥ 0, Page size between 1 and 100
-
-## Concurrency Handling
-
-The application implements several mechanisms to handle concurrent requests safely:
-
-1. Optimistic Locking
-   - Uses version field to detect concurrent modifications
-   - Prevents lost updates in concurrent scenarios
-
-2. Transaction Management
-   - Proper isolation levels for data consistency
-   - READ_COMMITTED isolation for most operations
-
-3. Thread Safety
-   - Thread-safe repository operations
-   - Synchronized blocks for critical sections
-
+  
 ## Error Handling
 
 The application includes comprehensive error handling for:
